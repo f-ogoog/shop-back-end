@@ -10,9 +10,5 @@ export const getProductResponse = (product: ProductDocument) => {
 };
 
 export const getProductsResponse = (products: ProductDocument[]) => {
-  return products.map((product) => ({
-    id: product._id,
-    name: product.name,
-    price: product.price,
-  }));
+  return products.map(getProductResponse);
 };

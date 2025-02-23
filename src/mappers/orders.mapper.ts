@@ -10,7 +10,7 @@ export const getSimpleOrderResponse = (order: OrderDocument) => {
     id: order._id,
     number: order.number,
     status: order.status,
-    saledate: order.saleDate,
+    saleDate: order.saleDate,
     deliveryDate: order.deliveryDate,
   };
 };
@@ -31,6 +31,7 @@ export const getOrderResponse = (order: OrderDocument) => {
             email: order.client.email,
             firstName: order.client.firstName,
             lastName: order.client.lastName,
+            middleName: order.client.middleName,
             phone: order.client.phone,
             address: order.client.address,
           }

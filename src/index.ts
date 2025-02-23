@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 import { errorHandler } from "./middlewares/error.handler";
 import productsRoutes from "./routes/products.routes";
 import ordersRoutes from "./routes/orders.routes";
+import cors from "cors";
+import { setupSwagger } from "./config/swagger";
 
 dotenv.config();
 
@@ -15,16 +17,22 @@ connectDB();
 
 const app = express();
 
-app.disable("x-powered-by").use(express.urlencoded({ extended: true }));
-
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+    credentials: true,
+  })
+);
 
 app.use("/auth", authRoutes);
 app.use("/products", productsRoutes);
 app.use("/orders", ordersRoutes);
 
 app.use(errorHandler);
+
+setupSwagger(app);
 
 app.listen(port, () => {
   console.log(`Server running on ${port}`);

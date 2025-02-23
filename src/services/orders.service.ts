@@ -1,4 +1,4 @@
-import orderModel, { OrderDocument } from "../models/order.model";
+import orderModel, { OrderDocument, OrderStatus } from "../models/order.model";
 import {
   Order,
   OrderProduct,
@@ -10,6 +10,7 @@ import { productService } from "./product.service";
 import { validateObjectId } from "../utils/mongo.utils";
 import clientModel from "../models/client.model";
 import { InvalidEntityIdExceprion } from "../utils/exceptions/invalid.entity.id.exception";
+import mongoose from "mongoose";
 
 const DISCOUNTS = new Map([
   [1000, 1],
@@ -102,16 +103,16 @@ const getAllOrders = async ({
   limit = 10,
   status,
   clientId,
+  order,
 }: OrderQuery) => {
   const query: Record<string, unknown> = {};
-
   search && (query.number = Number(search));
   status && (query.status = status);
-  clientId && (query.clientId = clientId);
+  clientId && (query.client = clientId);
 
   const orders = await orderModel
     .find(query)
-    .sort({ number: "desc" })
+    .sort({ number: order ?? "desc" })
     .skip((page - 1) * limit)
     .limit(limit);
 
@@ -121,7 +122,7 @@ const getAllOrders = async ({
     orders,
     pagination: {
       totalCount,
-      totalPages: Math.ceil(totalCount / limit),
+      totalPages: Math.ceil(totalCount / limit) || 1,
       page,
       limit,
     },
@@ -137,8 +138,15 @@ const getOrderById = async (id: string) => {
   return order;
 };
 
+const updateOrderStatusById = async (id: string, status: OrderStatus) => {
+  const order = await getOrderById(id);
+  order.status = status;
+  return await order.save();
+};
+
 export const ordersService = {
   createOrder,
   getAllOrders,
   getOrderById,
+  updateOrderStatusById,
 };

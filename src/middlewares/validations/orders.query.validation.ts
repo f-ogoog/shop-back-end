@@ -22,5 +22,10 @@ export const validateOrdersQuery = [
       `Status must be in enum: ${Object.values(OrderStatus).join(",")}`
     ),
 
+  query("order")
+    .optional()
+    .isIn(["asc", "desc"])
+    .withMessage('Sort must be either "asc" or "desc"'),
+
   handleValidationErrors,
 ];

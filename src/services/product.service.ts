@@ -32,7 +32,7 @@ const getAllProducts = async ({
     products,
     pagination: {
       totalCount,
-      totalPages: Math.ceil(totalCount / limit),
+      totalPages: Math.ceil(totalCount / limit) || 1,
       page,
       limit,
     },

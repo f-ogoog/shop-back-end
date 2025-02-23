@@ -16,6 +16,7 @@ export const getUserResponse = (user: UserDocument) => {
     role: user.role,
     firstName: client?.firstName,
     lastName: client?.lastName,
+    middleName: client?.middleName,
     email: client?.email,
     phone: client?.phone,
     address: client?.address,

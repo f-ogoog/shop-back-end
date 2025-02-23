@@ -23,4 +23,5 @@ export interface OrderQuery {
   limit?: number;
   status?: OrderStatus;
   clientId?: string;
+  order?: "asc" | "desc";
 }

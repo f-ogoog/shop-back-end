@@ -29,3 +29,10 @@ export const getMe = async (req: AuthenticatedRequest, res: Response) => {
   const user = getUserResponse(req.user!);
   res.status(200).json({ user });
 };
+
+export const logout = (req: Request, res: Response) => {
+  res
+    .clearCookie("token")
+    .status(201)
+    .json({ message: "User logout successfully" });
+};
