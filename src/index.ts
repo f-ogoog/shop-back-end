@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
 import authRoutes from "./routes/auth.routes";
@@ -14,7 +14,7 @@ import resolvers from "./graphql/resolvers";
 
 dotenv.config();
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT ?? 3001;
 
 const startServer = async () => {
   await connectDB();

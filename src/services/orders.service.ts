@@ -10,7 +10,6 @@ import { productService } from "./product.service";
 import { validateObjectId } from "../utils/mongo.utils";
 import clientModel from "../models/client.model";
 import { InvalidEntityIdExceprion } from "../utils/exceptions/invalid.entity.id.exception";
-import mongoose from "mongoose";
 
 const DISCOUNTS = new Map([
   [1000, 1],

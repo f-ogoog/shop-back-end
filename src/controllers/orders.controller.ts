@@ -1,4 +1,4 @@
-import { query, Request, Response } from "express";
+import { Request, Response } from "express";
 import { ordersService } from "../services/orders.service";
 import { AuthenticatedRequest } from "../types/auth.types";
 import { Role } from "../models/user.model";
@@ -51,7 +51,7 @@ export const updateOrderStatus = async (
 
   if (user?.role === "user") {
     const isOrderBelongToClient = client.orders.some(
-      (order) => order.toString() === orderId
+      (order) => order._id.toString() === orderId
     );
     if (!isOrderBelongToClient || status !== "paid")
       throw new UnauthorizedException("User can not perform this action");

@@ -1,4 +1,3 @@
-import { Db } from "mongodb";
 import userModel from "../models/user.model";
 import { LoginRequest, RegisterRequest } from "../types/auth.types";
 import { comparePasswords, hashPassword } from "../utils/bcrypt.utils";

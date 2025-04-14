@@ -1,6 +1,5 @@
 import { Response, NextFunction, Request } from "express";
 import HttpException from "../utils/exceptions/http.exception";
-import { timeStamp } from "console";
 
 export const errorHandler = (
   error: unknown,
